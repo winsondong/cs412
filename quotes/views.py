@@ -15,10 +15,10 @@ quotes = [
 ]
 
 images = [
-    "/static/muhammad-ali-1.jpg",
-    "/static/muhammad-ali-2.jpg",
-    "/static/muhammad-ali-3.jpg",
-    "/static/muhammad-ali-profile-image.jpg"
+    "../static/muhammad-ali-1.jpg",
+    "../static/muhammad-ali-2.jpg",
+    "../static/muhammad-ali-3.jpg",
+    "../static/muhammad-ali-profile-image.jpg"
 ]
 
 
@@ -65,8 +65,6 @@ def about_page(request):
     context = {
         "profile_pic": "/static/muhammad-ali-profile-image.jpg"
     }
-
-    
 
     return render(request, template_name, context)
 
