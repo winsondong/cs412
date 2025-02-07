@@ -63,7 +63,7 @@ def about_page(request):
     template_name = 'quotes/about.html'
 
     context = {
-        "profile_pic": "/static/muhammad-ali-profile-image.jpg"
+        "profile_pic": "../static/muhammad-ali-profile-image.jpg"
     }
 
     return render(request, template_name, context)
