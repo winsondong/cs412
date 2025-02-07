@@ -1,0 +1,23 @@
+<!-- File: quotes/templates/quotes/about.html -->
+
+{% extends 'quotes/base.html' %}
+
+    {% block content %}
+        <div class="about-container">
+            <h1>Welcome!</h1>
+            <p>Welcome to the <strong>Quote of the Day</strong> application!</p>
+
+            <p>This application displays quotes by and images of <strong>Muhammad Ali</strong>.</p>
+
+            <h2>About Muhammad Ali</h2>
+            <p>
+                Muhammad Ali, known as <strong>"The Greatest,"</strong> was a boxing legend, activist, and cultural icon. 
+                His speed, confidence, and charisma made him one of the most influential athletes in history. 
+                Beyond the ring, he fought for justice and inspired millions with his words and actions.
+            </p>
+
+            <div class="about-image">
+                <img class="about-pic" src="{{profile_pic}}" alt="Muhammad Ali">
+            </div>
+        </div>
+    {% endblock %}

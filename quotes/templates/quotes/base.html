@@ -1,0 +1,31 @@
+<!-- File: quotes/templates/quotes/main.html -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Muhammad Ali Quote of the Day</title>
+        <link rel="stylesheet" href="{% static 'quotes.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Muhammad Ali Quote of the Day</h1>
+        </header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'quote_page' %}">Quote of the Day</a></li>
+                <li><a href="{% url 'show_all_page' %}">Show all quotes</a></li>
+                <li><a href="{% url 'about_page' %}">About</a></li>
+            </ul>
+        </nav>
+       
+        <!-- put page specific content here -->
+        {% block content %}
+
+        
+        {% endblock %}
+
+        <footer>
+            <p>All rights reserved by Winson Dong <a href="">Credits</a>&copy;</p>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,13 @@
+<!-- File: quotes/templates/quotes/quote.html -->
+
+
+
+{% extends 'quotes/base.html' %}
+
+    {% block content %}
+    <div class="quote-container">
+        <p class="quote-text">{{quote}}</p>
+        <img class="quote-image" src="{{image}}" alt="Muhammad Ali">
+    </div>
+
+    {% endblock %}
