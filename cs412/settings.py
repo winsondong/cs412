@@ -40,8 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "hw", # NEW for hw
+    "hw", 
     "quotes",
+    "formdata", 
+    "restaurant",
 
 ]
 

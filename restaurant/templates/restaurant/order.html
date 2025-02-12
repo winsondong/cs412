@@ -1,0 +1,82 @@
+<!-- File: restaurant/templates/restaurant/order.html -->
+
+
+
+{% extends 'restaurant/base.html' %}
+
+    {% block content %}
+    <form action="{% url 'confirmation_page' %}" method="POST">
+        {% csrf_token %}
+
+        <div id="select-items">
+            <h2>Place an order!</h2>
+        
+            <h3>Select your item:</h3>
+        
+            {% for key, item in menu_items.items %}
+                <input type="checkbox" name="menu-items" value="{{key}}" id="{{key}}">
+                <label for="{{key}}">{{item.name}}</label>
+                <br><br>
+                
+                {% if item.has_options %}
+                <ul>
+                    <li>
+                        <label for="{{key}}-spice">Spice Level:</label>
+                        <select name="{{key}}-spice" id="{{key}}-spice">
+                            <option value="none">None</option>
+                            <option value="mild">Mild</option>
+                            <option value="medium">Medium</option>
+                            <option value="hot">Hot</option>
+                            <option value="extra-hot">Extra Hot</option>
+                        </select>
+                    </li>
+                </ul>
+                {% endif %}
+            {% endfor %}
+
+        </div>
+        
+
+        <div>
+            <h3>Daily Special:</h3>
+            <input type="checkbox" name="daily-special"value="{{special_name}}"id="daily-special"/>
+            <label for="{{special_name}}"><strong>{{special_name}}:</strong> {{special_description}}</label>
+            <br/>
+
+
+        </div>
+
+        <div>
+            <h3>Special Instructions:</h3>
+            <label for="special-instructions">Please share any special instructions:</label><br />
+            <textarea name="special-instructions" id="special-instructions" cols="30" rows="10" placeholder="Anything you want to add..."></textarea>
+        </div>
+
+        <div>
+            <h3>Customer Information:</h3>
+            <table>
+                <tr>
+                    <td><label for="name">Enter name:</label></td>
+                    <td><input type="text" id="name" name="name" required/></td>
+                </tr>
+
+                <tr>
+                    <td><label for="phone">Enter Phone:</label></td>
+                    <td><input type="phone" id="phone" name="phone" required/></td>
+                </tr>
+        
+                <tr>
+                    <td><label for="email">Enter Email:</label></td>
+                    <td><input type="email" id="email" name="email" required/></td>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h3>Place your order!</h3>
+            <input type="submit" value="Submit" class="submit"/>
+        </div>
+
+    </form>
+
+    {% endblock %}

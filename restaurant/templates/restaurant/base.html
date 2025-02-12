@@ -1,0 +1,33 @@
+<!-- File: restaurant/templates/restaurant/base.html -->
+
+{% load static %}
+<html>
+    <head>
+        <title>City King Buffet</title>
+        <link rel="stylesheet" href="{% static 'restaurant/restaurant.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>City King Buffet</h1>
+        </header>
+        <div id="container">
+        <nav>
+            <ul>
+                <li><a href="{% url 'main_page' %}">Main</a></li>
+                <li><a href="{% url 'order_page' %}">Order</a></li>
+            </ul>
+        </nav>
+       
+        <!-- put page specific content here -->
+        <main>
+        {% block content %}
+
+        {% endblock %}
+        </main>
+        </div>
+
+        <footer>
+            <p>All rights reserved by Winson Dong <a href="https://www.linkedin.com/in/winsondong/" target="_blank">Credits</a>&copy;</p>
+        </footer>
+    </body>
+</html>
