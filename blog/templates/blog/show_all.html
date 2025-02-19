@@ -1,0 +1,25 @@
+<!-- templates/show_all.html -->
+
+{% extends 'blog/base.html' %}
+{% block content %}
+<h1>Showing all Articles</h1>
+<!-- scriptlet code to display the value of the variable articles -->
+<!-- {{articles}} -->
+
+<main class="grid-container">
+    {% for a in articles %}
+    <article>
+        <div>
+            <h2>{{a.title}}</h2>
+            <h3>by {{a.author}}</h3>
+            <p>
+                {{a.text}}
+            </p>
+        </div>
+        <img src="{{a.image_url}}" alt="">
+    </article>
+    <hr>
+
+    {% endfor %}
+</main>
+{% endblock %}

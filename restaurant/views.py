@@ -61,6 +61,7 @@ def confirmation_page(request):
     '''Respond to the url /confirmation, display an online order confirmation of user's input.'''
     
     template_name = 'restaurant/confirmation.html'
+    print(request.POST)
     
      # check if POST data was sent with the HTTP POST message:
     if request.POST:
