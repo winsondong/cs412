@@ -6,9 +6,9 @@ class Article(models.Model):
     '''Encapsulate the idea of an Article by some author.'''
 
     # data attributes of a Article:
-    title = models.TextField(blank=False)
-    author = models.TextField(blank=False)
-    text = models.TextField(blank=False)
+    title = models.TextField(blank=True)
+    author = models.TextField(blank=True)
+    text = models.TextField(blank=True)
     published = models.DateTimeField(auto_now=True)
     image_url = models.URLField(blank=True) ## new
     

@@ -1,0 +1,18 @@
+<!-- File: mini_fb/templates/mini_fb/show_profile.html -->
+
+
+{% extends 'mini_fb/base.html' %}
+
+    {% block content %}
+    
+    <table>
+    <tr>
+        <td>{{profile.first}}</td>
+        <td>{{profile.last}}</td>
+        <td>{{profile.city}}</td>
+        <td><img src="{{profile.profile_image_url}}" alt=""></td>
+    </tr>
+
+    </table>
+
+    {% endblock %}

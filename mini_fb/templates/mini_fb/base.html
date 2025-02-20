@@ -1,0 +1,29 @@
+<!-- File: mini_fb/templates/mini_fb/base.html -->
+
+{% load static %}
+<html>
+    <head>
+        <title>Mini FB</title>
+        <link rel="stylesheet" href="{% static 'mini_fb/mini_fb.css' %}">
+    </head>
+    <body>
+        <header>
+            <h1>Mini FB</h1>
+            <nav>
+                <ul><a href="{% url 'show_all_profiles' %}">Show All</a></ul>
+            </nav>
+        </header>
+       
+        <!-- put page specific content here -->
+        <main>
+        {% block content %}
+
+        {% endblock %}
+        </main>
+        </div>
+
+        <footer>
+            <p>All rights reserved by Winson Dong <a href="https://www.linkedin.com/in/winsondong/" target="_blank">Credits</a>&copy;</p>
+        </footer>
+    </body>
+</html>
