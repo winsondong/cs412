@@ -4,11 +4,15 @@
 {% extends 'mini_fb/base.html' %}
 
     {% block content %}
-    
     <table>
     <tr>
-        <td>{{profile.first}}</td>
-        <td>{{profile.last}}</td>
+        <th>Name</th>
+        <th>City</th>
+    </tr>
+    <tr>
+        <td>{{profile.first}}
+            {{profile.last}}
+        </td>
         <td>{{profile.city}}</td>
         <td><img src="{{profile.profile_image_url}}" alt=""></td>
     </tr>
