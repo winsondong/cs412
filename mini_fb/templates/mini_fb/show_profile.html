@@ -8,6 +8,8 @@
     <tr>
         <th>Name</th>
         <th>City</th>
+        <th>hello</th>
+        <th>Status Message</th>
     </tr>
     <tr>
         <td>{{profile.first}}
@@ -15,8 +17,14 @@
         </td>
         <td>{{profile.city}}</td>
         <td><img src="{{profile.profile_image_url}}" alt=""></td>
+        <td>
+            {% for message in profile.get_status_messages %}
+                "{{message.message}}" - 
+                {{message.timestamp}}
+            {% endfor %}
+        </td>
     </tr>
-
+    
     </table>
 
     {% endblock %}
