@@ -8,7 +8,7 @@
     <tr>
         <th>Name</th>
         <th>City</th>
-        <th>hello</th>
+        <th></th>
         <th>Status Message</th>
     </tr>
     <tr>
@@ -21,10 +21,21 @@
             {% for message in profile.get_status_messages %}
                 "{{message.message}}" - 
                 {{message.timestamp}}
+                <br>
             {% endfor %}
         </td>
     </tr>
+    <div class="add-status-container">
+        <h3>
+            <a href="{% url 'create_status' profile.pk %}" class="add-status-link">
+                Click to add status message
+            </a>
+        </h3>
+    </div>
+    
+      
     
     </table>
+    
 
     {% endblock %}
