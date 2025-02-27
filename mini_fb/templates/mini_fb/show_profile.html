@@ -1,5 +1,12 @@
 <!-- File: mini_fb/templates/mini_fb/show_profile.html -->
-
+ <!--
+    CS412 - Assignment 6
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template displays an individual user's profile, including their profile picture, name, city, and email.
+    Users can also view status updates posted by the profile owner.
+-->
 
 {% extends 'mini_fb/base.html' %}
 
@@ -8,6 +15,7 @@
     <tr>
         <th>Name</th>
         <th>City</th>
+        <th>Email</th>
         <th></th>
         <th>Status Message</th>
     </tr>
@@ -16,6 +24,7 @@
             {{profile.last}}
         </td>
         <td>{{profile.city}}</td>
+        <td>{{profile.email_address}}</td>
         <td><img src="{{profile.profile_image_url}}" alt=""></td>
         <td>
             {% for message in profile.get_status_messages %}

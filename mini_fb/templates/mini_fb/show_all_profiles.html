@@ -1,4 +1,13 @@
 <!-- File: mini_fb/templates/mini_fb/show_all_profiles.html -->
+ <!--
+    CS412 - Assignment 6
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template displays a list of all user profiles in a table format.
+    Each profile includes the user's first name, last name, city, and profile picture.
+    Users can click on a profile to view more details.
+-->
 
 
 {% extends 'mini_fb/base.html' %}
@@ -10,6 +19,7 @@
     <tr>
         <th>Name</th>
         <th>City</th>
+        <th>Email</th>
     </tr>
     {% for profile in profiles %}
     <tr>
@@ -21,7 +31,9 @@
         </td>
         
         <td>{{profile.city}}</td>
-        
+
+        <td>{{profile.email_address}}</td>
+
         <td>
             <a href="{% url 'show_profile' profile.pk %}">
             <img src="{{profile.profile_image_url}}" alt="">
