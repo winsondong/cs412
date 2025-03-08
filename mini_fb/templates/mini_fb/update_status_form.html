@@ -1,0 +1,32 @@
+<!-- File: mini_fb/templates/mini_fb/update_status_form.html -->
+<!--
+    CS412 - Assignment 6
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template provides a form for users to update a StatusMessage
+    
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+    {% block content %}
+    <h1>Update Status Message for {{ profile.first }} {{ profile.last }}</h1>
+
+    <!-- Form to update the status message -->
+    <form action="{% url 'update_status' object.pk %}" method="post">
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+
+        <input type="submit" name="submit" value="Submit">
+
+        <!-- Add a separate form for a cancel button -->
+        <form action="{% url 'show_profile' profile.pk %}" method="GET">
+            <input type="submit" value="Cancel">
+        </form>
+    </form>
+
+
+    {% endblock %}

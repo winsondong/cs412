@@ -25,19 +25,33 @@
         </td>
         <td>{{profile.city}}</td>
         <td>{{profile.email_address}}</td>
-        <td><img src="{{profile.profile_image_url}}" alt=""></td>
+        <td><img src="{{profile.profile_image_url}}" alt="{{profile.first}} {{profile.last}}"></td>
         <td>
             {% for message in profile.get_status_messages %}
-                "{{message.message}}" - 
-                {{message.timestamp}}
-                <br>
+                <div>
+                    "{{message.message}}" - {{message.timestamp}}
+                    <br>
+                    {% for statusimage in message.get_images %}
+                        <img src="{{ statusimage.image.image_file.url }}" alt="Image ">
+                    {% endfor %}
+                </div>
+
+                <a href="{% url 'update_status' message.pk %}">Update</a>
+                <a href="{% url 'delete_status' message.pk %}">Delete</a>
+
             {% endfor %}
         </td>
     </tr>
+
     <div class="add-status-container">
         <h3>
+            <a href="{% url 'update_profile' profile.pk %}" class="add-status-link">
+                Update profile
+            </a>
+        </h3>
+        <h3>
             <a href="{% url 'create_status' profile.pk %}" class="add-status-link">
-                Click to add status message
+                Add status message
             </a>
         </h3>
     </div>

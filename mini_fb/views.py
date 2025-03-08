@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from .models import Profile
-from django.views.generic import ListView, DetailView, CreateView
-from .forms import CreateProfileForm, CreateStatusMessageForm
+from .models import Profile, StatusMessage, Image, StatusImage
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
 
 
@@ -14,12 +14,16 @@ class ShowAllProfilesView(ListView):
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles' # how to find the data in the template file
 
+
+
 class ShowProfilePageView(DetailView):
     '''Show the details for one profile.'''
 
     model = Profile 
     template_name = 'mini_fb/show_profile.html' 
     context_object_name = 'profile' 
+
+
 
 class CreateProfileView(CreateView):
     '''A view to handle creation of a new Profile.
@@ -28,6 +32,7 @@ class CreateProfileView(CreateView):
     '''
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
+
 
 
 class CreateStatusMessageView(CreateView):
@@ -77,8 +82,89 @@ class CreateStatusMessageView(CreateView):
         # attach this profile to the status message
         form.instance.profile = profile # set the FK
 
+        # save the status message to database
+        sm = form.save()
+
+        # read the file from the form:
+        files = self.request.FILES.getlist('files')
+
+        for file in files:
+            # Create an Image object
+            image = Image(profile=profile, image_file=file)
+            image.save()
+
+            # Create an StatusImage object
+            status_image = StatusImage(image=image, status_message=sm)
+            status_image.save()
+
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)
+    
+
+
+class UpdateProfileView(UpdateView):
+    '''A view to handle updating an existing Profile.
+    (1) display the HTML form to user (GET)
+    (2) process the form submission and update the existing Profile object (POST).
+    '''
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = 'mini_fb/update_profile_form.html'
+
+
+
+class DeleteStatusMessageView(DeleteView):
+    '''A view to delete a StatusMessage.'''
+
+    model = StatusMessage
+    template_name = 'mini_fb/delete_status_form.html'
+    context_object_name = 'status_message'
+
+    def get_success_url(self):
+        ''' Return the URL to which we should be directed after the delete. '''
+
+        # getting the pk for this status message
+        pk = self.kwargs.get('pk')
+
+        # find the StatusMessage object
+        status_message = StatusMessage.objects.get(pk=pk)
+
+        # find the Profile that this StatusMessage relate to 
+        profile = status_message.profile  
+
+        # reverse to show the Profile page
+        return reverse('show_profile', kwargs={'pk': profile.pk})
+    
+
+class UpdateStatusMessageView(UpdateView):
+    ''' A view to update a StatusMessage '''
+    model = StatusMessage
+    form_class = UpdateStatusMessageForm
+    template_name = 'mini_fb/update_status_form.html'
+
+    def get_context_data(self):
+        context = super().get_context_data()
+        context['profile'] = self.object.profile  # Add profile to context
+        return context
+
+    def get_success_url(self):
+            ''' Return the URL to which we should be directed after the delete. '''
+
+            # getting the pk for this status message
+            pk = self.kwargs.get('pk')
+
+            # find the StatusMessage object
+            status_message = StatusMessage.objects.get(pk=pk)
+
+            # find the Profile that this StatusMessage relate to 
+            profile = status_message.profile  
+
+            # reverse to show the Profile page
+            return reverse('show_profile', kwargs={'pk': profile.pk})
+    
+
+
+
 
 
 

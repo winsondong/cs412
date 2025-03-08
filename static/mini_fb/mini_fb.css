@@ -129,6 +129,7 @@ input[type="submit"]:hover {
 
 /* add status button */
 .add-status-container {
+    justify-content: space-between;
     text-align: right; 
     margin-right: 5px; 
 }

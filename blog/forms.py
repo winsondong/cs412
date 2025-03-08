@@ -7,7 +7,15 @@ class CreateArticleForm(forms.ModelForm):
     class Meta:
         '''associate this form with a model from our database.'''
         model = Article
-        fields = ['author', 'title', 'text', 'image_url']
+        fields = ['author', 'title', 'text', 'image_file']
+
+class UpdateArticleForm(forms.ModelForm):
+    '''A form to handle an update to an Article.'''
+
+    class Meta:
+        '''Associate this form with a model in our database.'''
+        model = Article
+        fields = ['title', 'text']
 
 
 class CreateCommentForm(forms.ModelForm):
@@ -18,3 +26,4 @@ class CreateCommentForm(forms.ModelForm):
         model = Comment
         #fields = ['article', 'author', 'text', ]  # which fields from model should we use
         fields = ['author', 'text', ] # we dont want the drop-down list
+
