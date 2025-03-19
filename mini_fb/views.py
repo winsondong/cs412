@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Profile, StatusMessage, Image, StatusImage
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
 from .forms import CreateProfileForm, CreateStatusMessageForm, UpdateProfileForm, UpdateStatusMessageForm
 from django.urls import reverse
+
 
 
 # Create your views here.
@@ -161,6 +162,35 @@ class UpdateStatusMessageView(UpdateView):
 
             # reverse to show the Profile page
             return reverse('show_profile', kwargs={'pk': profile.pk})
+    
+
+class AddFriendView(View):
+    ''' A view to add friend '''
+
+    def dispatch(self, request, *args, **kwargs):
+        # get the primary keys
+        profile_pk = kwargs['pk']
+        other_profile_pk = kwargs['other_pk']
+
+        # find the Profile objects
+        profile = Profile.objects.get(pk=profile_pk)
+        other_profile = Profile.objects.get(pk=other_profile_pk)
+
+        # call the add_friend method from the Profile model
+        profile.add_friend(other_profile)
+
+        # redirect user back to profile page
+        return redirect('show_profile', pk=profile.pk)
+    
+
+class ShowFriendSuggestionsView(DetailView):
+    ''' A view to show friend suggestions '''
+    model = Profile
+    template_name = 'mini_fb/friend_suggestions.html'
+    
+        
+
+
     
 
 

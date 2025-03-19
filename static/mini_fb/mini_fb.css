@@ -152,6 +152,11 @@ input[type="submit"]:hover {
     text-decoration: none;
 }
 
+.confirmation-buttons {
+    display: flex;
+    gap: 10px;
+}
+
 
 /** Footer **/
 footer {

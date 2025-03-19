@@ -1,0 +1,31 @@
+<!-- File: mini_fb/templates/mini_fb/friend_suggestionshtml -->
+<!--
+    CS412 - Mini Facebook
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template provides the page to see friend suggestions for a Profile
+    
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+    {% block content %}
+    <h3>
+        <a href="{% url 'show_profile' profile.pk %}" class="add-status-link">
+            Back to {{profile.first}}'s page
+        </a>
+    </h3>
+
+    <h3>People {{profile.first}} {{profile.last}} may know:</h3>
+
+    {% for friend in profile.get_friend_suggestions %}
+        <div style="display: flex; flex-direction: column;">
+            <a href="{% url 'add_friend' profile.pk friend.pk %}">Add Friend</a>
+            {{friend.first}} {{friend.last}}
+            <img src="{{friend.profile_image_url}}" alt="{{friend.first}} {{friend.last}}">
+        </div>
+    {% endfor %}
+
+
+    {% endblock %}

@@ -1,6 +1,6 @@
 <!-- File: mini_fb/templates/mini_fb/show_profile.html -->
  <!--
-    CS412 - Assignment 6
+    CS412 - Mini Facebook
     Author: Winson Dong (winson@bu.edu)
     
     Description:
@@ -18,6 +18,7 @@
         <th>Email</th>
         <th></th>
         <th>Status Message</th>
+        <th>{{profile.first}}'s friends</th>
     </tr>
     <tr>
         <td>{{profile.first}}
@@ -32,7 +33,7 @@
                     "{{message.message}}" - {{message.timestamp}}
                     <br>
                     {% for statusimage in message.get_images %}
-                        <img src="{{ statusimage.image.image_file.url }}" alt="Image ">
+                        <img src="{{ statusimage.image.image_file.url }}" alt="Image">
                     {% endfor %}
                 </div>
 
@@ -40,6 +41,22 @@
                 <a href="{% url 'delete_status' message.pk %}">Delete</a>
 
             {% endfor %}
+        </td>
+        <td>
+            {% if profile.get_friends %}
+                {% for friend in profile.get_friends %}
+                    <div>
+                        <a href="{% url 'show_profile' friend.pk %}">
+                            <img src="{{friend.profile_image_url}}" alt="{{friend.first}} {{friend.last}}">
+                        </a>
+                        <a href="{% url 'show_profile' friend.pk %}">
+                            {{friend.first}} {{friend.last}}
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <div>No friends yet</div>
+            {% endif %}
         </td>
     </tr>
 
@@ -56,9 +73,15 @@
         </h3>
     </div>
     
-      
     
     </table>
+    <div style="text-align: right;">
+        <h3>
+            <a href="{% url 'show_friend_suggestions' profile.pk %}" class="add-status-link">
+                Friend Suggestions
+            </a>
+        </h3>
+    </div>
     
 
     {% endblock %}

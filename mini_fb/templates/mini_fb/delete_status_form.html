@@ -1,6 +1,6 @@
 <!-- File: mini_fb/templates/mini_fb/delete_status_form.html -->
 <!--
-    CS412 - Assignment 6
+    CS412 - Mini Facebook
     Author: Winson Dong (winson@bu.edu)
     
     Description:
@@ -8,11 +8,9 @@
     
 -->
 
-{% extends 'blog/base.html' %}
+{% extends 'mini_fb/base.html' %}
 
     {% block content %}
-    <!-- templates/blog/delete_comment.html -->
-
     <h3>Delete Status Message?</h3>
 
     <div>
@@ -24,15 +22,17 @@
     </div>
 
     <!-- form to submit the delete request -->
-    <form method='POST'>
-        {% csrf_token %}
-        <input type='submit' value="Delete">
-    </form>
+     <div class="confirmation-buttons">
+        <form method='POST'>
+            {% csrf_token %}
+            <input type='submit' value="Delete">
+        </form>
 
-    <!-- Add a separate form for a cancel button -->
-    <form action="{% url 'show_profile' status_message.profile.pk %}" method="GET">
-        <input type="submit" value="Cancel">
-    </form>
+        <!-- Add a separate form for a cancel button -->
+        <form action="{% url 'show_profile' status_message.profile.pk %}" method="GET">
+            <input type="submit" value="Cancel">
+        </form>
+    </div>
 
 
 

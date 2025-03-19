@@ -23,7 +23,44 @@ class Profile(models.Model):
         '''Return the URL to display one instance of this model.'''
         return reverse('show_profile', kwargs={'pk':self.pk})
     
+    def get_friends(self):
+        
+        # Get Friend objects where it's either profile1 or profile2
+        friends_profile1 = Friend.objects.filter(profile1=self)
+        friends_profile2 = Friend.objects.filter(profile2=self)
+
+        friend_profiles = []
+
+        for friend in friends_profile1:
+            friend_profiles.append(friend.profile2)
+
+        for friend in friends_profile2:
+            friend_profiles.append(friend.profile1)
+
+        return friend_profiles
     
+
+    def add_friend(self, other):
+        ''' to add friend between two Profile'''
+        existing_friendship = Friend.objects.filter(profile1=self, profile2=other).exists() or Friend.objects.filter(profile1=other, profile2=self).exists()
+
+        if not existing_friendship:
+            friendship = Friend(profile1=self, profile2=other)
+            friendship.save()
+
+    
+    def get_friend_suggestions(self):
+        possible_friends = set()
+
+        direct_friends = set(self.get_friends())
+        for friend in direct_friends:
+            for fof in friend.get_friends(): # get friends of friends
+                if fof != self and fof not in direct_friends:
+                    possible_friends.add(fof)
+        
+        return list(possible_friends) 
+
+            
 class StatusMessage(models.Model):
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -45,11 +82,22 @@ class Image(models.Model):
     def __str__(self): 
         return f"Image uploaded by: {self.profile} on {self.timestamp}"
     
+
+    
 class StatusImage(models.Model):
     image = models.ForeignKey("Image", on_delete=models.CASCADE)
     status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)
     
     def __str__(self):
         return f"Image {self.image} linked to StatusMessage {self.status_message}"
+    
+
+class Friend(models.Model):
+    profile1 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile1")
+    profile2 = models.ForeignKey("Profile", on_delete=models.CASCADE, related_name="profile2")
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.profile1} and {self.profile2}"
     
     
