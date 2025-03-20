@@ -15,7 +15,7 @@
 
     <!-- Form to update the status message -->
     <div>
-        <form action="{% url 'update_status' object.pk %}" method="post">
+        <form action="{% url 'update_status' object.pk %}" method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <table>
                 {{form.as_table}}
@@ -29,6 +29,8 @@
                     <input type="submit" value="Cancel">
                 </form>
             </div>
+            
+            <input type="file" name = "files" multiple />
         </form>
     </div>
 

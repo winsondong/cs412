@@ -1,3 +1,10 @@
+"""
+File: mini_fb/apps.py
+Author: Winson Dong (winson@bu.edu)
+Description:
+    Configures the mini_fb app.
+"""
+
 from django.apps import AppConfig
 
 

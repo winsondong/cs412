@@ -1,3 +1,10 @@
+"""
+File: mini_fb/models.py
+Author: Winson Dong (winson@bu.edu)
+Description:
+    Defines database models for Profile, StatusMessage, Image, StatusImage, and Friend.
+"""
+
 from django.db import models
 from django.urls import reverse
 
@@ -16,7 +23,7 @@ class Profile(models.Model):
     def get_status_messages(self):
         '''Return all status messages for this profile'''
 
-        messages = StatusMessage.objects.filter(profile=self)
+        messages = StatusMessage.objects.filter(profile=self).order_by('-timestamp')
         return messages
     
     def get_absolute_url(self):
@@ -59,8 +66,17 @@ class Profile(models.Model):
                     possible_friends.add(fof)
         
         return list(possible_friends) 
+    
 
-            
+    def get_news_feed(self):
+
+        friends = self.get_friends()
+        profiles = friends + [self]
+        news_feed = StatusMessage.objects.filter(profile__in=profiles).order_by('-timestamp')
+    
+        return news_feed
+
+        
 class StatusMessage(models.Model):
     profile = models.ForeignKey("Profile", on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -83,7 +99,6 @@ class Image(models.Model):
         return f"Image uploaded by: {self.profile} on {self.timestamp}"
     
 
-    
 class StatusImage(models.Model):
     image = models.ForeignKey("Image", on_delete=models.CASCADE)
     status_message = models.ForeignKey("StatusMessage", on_delete=models.CASCADE)

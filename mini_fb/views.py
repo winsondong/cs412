@@ -1,3 +1,11 @@
+"""
+File: mini_fb/views.py
+Author: Winson Dong (winson@bu.edu)
+Description:
+    Handles requests, renders templates, and processes user actions.
+"""
+
+
 from django.shortcuts import render, redirect
 from .models import Profile, StatusMessage, Image, StatusImage
 from django.views.generic import View, ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -187,6 +195,13 @@ class ShowFriendSuggestionsView(DetailView):
     ''' A view to show friend suggestions '''
     model = Profile
     template_name = 'mini_fb/friend_suggestions.html'
+
+
+class ShowNewsFeedView(DetailView):
+    ''' A view to show news feed '''
+    model = Profile
+    template_name = 'mini_fb/news_feed.html'
+    context_object_name = "profile"
     
         
 

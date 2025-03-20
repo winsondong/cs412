@@ -1,5 +1,10 @@
-# creates the form model for each of the forms of the app. One for creating a profile and 
-# for creating a status message
+"""
+File: mini_fb/forms.py
+Author: Winson Dong (winson@bu.edu)
+Description:
+    Defines forms for user input validation.
+"""
+
 
 from django import forms
 from .models import Profile, StatusMessage

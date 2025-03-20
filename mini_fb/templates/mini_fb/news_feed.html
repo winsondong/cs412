@@ -1,0 +1,44 @@
+<!-- File: mini_fb/templates/mini_fb/news_feed.html -->
+<!--
+    CS412 - Mini Facebook
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template provides the page to see the news feed for the specific Profile
+    
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+    {% block content %}
+    <h3>
+        <a href="{% url 'show_profile' profile.pk %}" class="add-status-link">
+            Back to {{profile.first}}'s page
+        </a>
+    </h3>
+    
+    <h3>{{profile.first}}'s News Feed</h3>
+    
+    <div>
+        {% for feed in profile.get_news_feed %}
+        <div class="feed-item">
+            <div class="feed-header">
+                <img src="{{feed.profile.profile_image_url}}" alt="{{feed.profile.first}}">
+                {{feed.profile.first}} {{feed.profile.last}}
+                {{feed.timestamp}}
+            </div>
+
+            {{feed.message}}
+            <br>
+            
+            {% for image in feed.get_images %}
+                <img class="news-feed-image" src="{{image.image.image_file.url}}" alt="Image">
+            {% endfor %}
+            
+        </div>
+        {% endfor %}
+        
+    </div>
+
+
+    {% endblock %}

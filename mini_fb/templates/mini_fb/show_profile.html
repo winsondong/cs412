@@ -59,18 +59,25 @@
             {% endif %}
         </td>
     </tr>
-
-    <div class="add-status-container">
+    
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 100%;">
         <h3>
-            <a href="{% url 'update_profile' profile.pk %}" class="add-status-link">
-                Update profile
+            <a href="{% url 'show_news_feed' profile.pk %}" class="add-status-link">
+                News Feed
             </a>
         </h3>
-        <h3>
-            <a href="{% url 'create_status' profile.pk %}" class="add-status-link">
-                Add status message
-            </a>
-        </h3>
+        <div class="add-status-container">
+            <h3>
+                <a href="{% url 'update_profile' profile.pk %}" class="add-status-link">
+                    Update profile
+                </a>
+            </h3>
+            <h3>
+                <a href="{% url 'create_status' profile.pk %}" class="add-status-link">
+                    Add status message
+                </a>
+            </h3>
+        </div>
     </div>
     
     
@@ -81,6 +88,7 @@
                 Friend Suggestions
             </a>
         </h3>
+        
     </div>
     
 
