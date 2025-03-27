@@ -40,3 +40,4 @@ class UpdateStatusMessageForm(forms.ModelForm):
         ''' associate this form to the model in our database '''
         model = StatusMessage
         fields = ["message"]
+

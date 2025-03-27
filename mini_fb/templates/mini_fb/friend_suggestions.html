@@ -25,7 +25,7 @@
                 <img src="{{friend.profile_image_url}}" alt="{{friend.first}} {{friend.last}}">
                 {{friend.first}} {{friend.last}}
             </div>
-            <a href="{% url 'add_friend' profile.pk friend.pk %}">Add Friend</a>
+            <a href="{% url 'add_friend' friend.pk %}">Add Friend</a>
         </div>
     {% endfor %}
 

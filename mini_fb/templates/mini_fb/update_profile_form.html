@@ -14,7 +14,7 @@
     <div>
         <h1>Update profile for {{profile.first}} {{profile.last}}</h1>
         
-        <form action="{% url 'update_profile' profile.pk %}" method="post" enctype="multipart/form-data">
+        <form action="{% url 'update_profile' %}" method="post" enctype="multipart/form-data">
             
             {% csrf_token %}
             <table>

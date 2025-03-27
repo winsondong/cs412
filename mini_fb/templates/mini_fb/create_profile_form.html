@@ -15,11 +15,15 @@
     <form action="{% url 'create_profile' %}" method="post">
         {% csrf_token %}
 
+        <h3>Create user</h3>
+        {{user_form}}
+
+        <h3>Create profile</h3>
         <table>
             {{form.as_table}}
         </table>
 
-        <input type="submit" name="submit" value="Submit">
+        <input type="submit" name="submit" value="Create new profile">
     </form>
     
 

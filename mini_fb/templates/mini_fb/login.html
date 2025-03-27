@@ -1,0 +1,39 @@
+<!-- File: mini_fb/templates/mini_fb/login.html -->
+<!--
+    CS412 - Mini Facebook
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template provides the page to for user to login.
+    
+-->
+
+{% extends 'mini_fb/base.html' %}
+
+{% block content %}
+
+<h1>Login to Mini Facebook</h1>
+<form method="post" action="{% url 'login' %}" >
+    
+    {% csrf_token %}
+    
+    <label for="{{ form.username.id_for_label }}">Username:</label>
+    {{ form.username }}
+
+    <label for="{{ form.password.id_for_label }}">Password:</label>
+    {{ form.password }}
+    
+    <br>
+
+    <input type="submit" value="Login">
+     {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+     {% else %}
+        <input type="hidden" name="next" value="{% url 'show_all_profiles' %}">
+     {% endif %}
+</form>
+<hr>
+Don't have an account?
+<a href="{% url 'create_profile' %}">Click here!</a>
+
+{% endblock %}
