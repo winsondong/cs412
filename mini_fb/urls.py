@@ -18,6 +18,7 @@ from .views import (
     AddFriendView,
     ShowFriendSuggestionsView,
     ShowNewsFeedView,
+    
 )
 from django.contrib.auth import views as auth_views
 

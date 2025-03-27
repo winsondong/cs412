@@ -27,7 +27,7 @@ class ShowAllProfilesView(ListView):
     template_name = 'mini_fb/show_all_profiles.html'
     context_object_name = 'profiles' # how to find the data in the template file
 
-
+    
 
 class ShowProfilePageView(DetailView):
     '''Show the details for one profile.'''
@@ -139,6 +139,11 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         return self.object.profile.get_absolute_url()
     
 
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
+    
+
     def get_object(self):
 
         return Profile.objects.get(user=self.request.user)
@@ -153,6 +158,10 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = 'mini_fb/update_profile_form.html'
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
 
     def get_object(self):
 
@@ -180,6 +189,10 @@ class DeleteStatusMessageView(LoginRequiredMixin, DeleteView):
 
         # reverse to show the Profile page
         return reverse('show_profile', kwargs={'pk': profile.pk})
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
     
 
 class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
@@ -207,6 +220,10 @@ class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
 
             # reverse to show the Profile page
             return reverse('show_profile', kwargs={'pk': profile.pk})
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
     
 
 class AddFriendView(LoginRequiredMixin, View):
@@ -227,6 +244,11 @@ class AddFriendView(LoginRequiredMixin, View):
     
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
+
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
     
 
 class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
@@ -236,6 +258,11 @@ class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
 
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
+    
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
 
 
 class ShowNewsFeedView(LoginRequiredMixin, DetailView):
@@ -247,4 +274,8 @@ class ShowNewsFeedView(LoginRequiredMixin, DetailView):
     def get_object(self):
         return Profile.objects.get(user=self.request.user)
     
+
+    def get_login_url(self):
+        ''' custom URL '''
+        return reverse("login")
     
