@@ -45,7 +45,9 @@ INSTALLED_APPS = [
     "formdata", 
     "restaurant",
     "blog",
-    "mini_fb"
+    "mini_fb",
+    "marathon_analytics",
+    "voter_analytics"
 
 ]
 
