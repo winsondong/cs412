@@ -132,6 +132,10 @@ class GraphListView(ListView):
         voters = context['voters']
         num_voters = len(voters)
 
+        current_year = datetime.datetime.now().year
+        birth_years = range(current_year - 100, current_year - 17)
+        context["birth_years"] = birth_years
+
         # Graph 1: Voter Birth Year Distribution
         birth_year_counts = {}
         for v in voters:
