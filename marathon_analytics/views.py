@@ -3,7 +3,7 @@
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
-from . models import Result
+from .models import Result
 
 import plotly
 import plotly.graph_objs as go
@@ -50,6 +50,7 @@ class ResultDetailView(DetailView):
         x = ['first half', 'second half']
         y = [first_half_seconds , second_half_seconds]
         
+        ### graph 1: ###
         # generate the Pie chart
         fig = go.Pie(labels=x, values=y) 
         title_text = f"Half Marathon Splits"
@@ -63,6 +64,7 @@ class ResultDetailView(DetailView):
         context['graph_div_splits'] = graph_div_splits
 
 
+        ### graph 2: ###
         # create graph of runners who passed/passed by
         x= [f'Runners Passed by {r.first_name}', f'Runners who Passed {r.first_name}']
         y = [r.get_runners_passed(), r.get_runners_passed_by()]

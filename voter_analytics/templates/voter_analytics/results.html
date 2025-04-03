@@ -1,0 +1,77 @@
+<!-- File: voter_analytics/templates/voter_analytics/results.html -->
+<!--
+    CS412 Assignment 10 - External Data, Filtering and Graphing
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This is the results template which will show all the voters and you can go through each page of 100.
+-->
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <div>
+        <form action="{% url 'home' %}" method="GET">
+          {% include "voter_analytics/filter.html" %}
+        </form>
+    </div>
+
+    <!-- navigation links for different pages of results -->
+    <div class="row">
+        {% if is_paginated %}
+        <ul class="pagination">
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                
+                </li>
+            {% endif %}
+                <li class="">
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+            </ul>
+        {% endif %}
+    </div>
+
+	<h1>Voters</h1>
+    <div class="row">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Street Address</th>
+                <th>Date of Birth</th>
+                <th>Party Affiliation</th>
+                <th>Voter Score</th>   
+            </tr>
+    
+            {% for v in voters %}
+            <tr>
+                
+                <td><a href="{% url 'voter' v.pk %}">{{ v.first_name }}</a></td>
+                <td>{{v.last_name}}</td>
+                {% if v.res_street_number and v.res_street_name and v.res_apartment_number and v.res_zip_code %}
+                    <td>{{v.res_street_number}} {{v.res_street_name}}, Apt {{v.res_apartment_number}}, {{v.res_zip_code}}</td>
+                {% elif  v.res_street_number and v.res_street_name and v.res_zip_code %}
+                    <td>{{v.res_street_number}} {{v.res_street_name}}, {{v.res_zip_code}}</td>
+                {% else %}
+                    <td>None</td>
+                {% endif %}
+                <td>{{v.dob}}</td>
+                <td>{{v.party_affiliation}}</td>
+                <td>{{v.voter_score}}</td> 
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div>
+</div>
+    
+{% endblock %}

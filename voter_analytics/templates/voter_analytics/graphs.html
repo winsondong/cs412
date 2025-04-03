@@ -1,0 +1,50 @@
+<!-- File: voter_analytics/templates/voter_analytics/graphs.html -->
+<!--
+    CS412 Assignment 10 - External Data, Filtering and Graphing
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This is the graphs template which will generate graphs
+-->
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h1>Voter Analytics Graphs</h1>
+
+    <div>
+        <form action="{% url 'graphs' %}" method="GET">
+          {% include "voter_analytics/filter.html" %}
+        </form>
+    </div>
+
+    <div class="graph-section">
+        <h2>Birth Year Distribution</h2>
+        {% if bar_div %}
+            {{bar_div|safe}}
+        {% else %}
+            <p>No birth year data available.</p>
+        {% endif %}
+    </div>
+
+    <div class="graph-section">
+        <h2>Party Affiliation</h2>
+        {% if pie_div %}
+            {{pie_div|safe}}
+        {% else %}
+            <p>No party data available.</p>
+        {% endif %}
+    </div>
+
+    <div class="graph-section">
+        <h2>Election Participation</h2>
+        {% if election_bar_div %}
+            {{election_bar_div|safe}}
+        {% else %}
+            <p>No election participation data available.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

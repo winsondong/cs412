@@ -1,3 +1,10 @@
+"""
+File: voter_analytics/models.py
+Author: Winson Dong (winson@bu.edu)
+Description:
+     Defines database models for Voter.
+"""
+
 from django.db import models
 
 # Create your models here.
