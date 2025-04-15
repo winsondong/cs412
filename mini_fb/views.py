@@ -43,6 +43,7 @@ class CreateProfileView(CreateView):
     (1) display the HTML form to user (GET)
     (2) process the form submission and store the new Profile object (POST)
     '''
+    model = Profile
     form_class = CreateProfileForm
     template_name = 'mini_fb/create_profile_form.html'
 
@@ -135,7 +136,6 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
     def get_success_url(self) -> str:
         '''Return the URL to redirect to after successfully submitting form.'''
        
-
         return self.object.profile.get_absolute_url()
     
 

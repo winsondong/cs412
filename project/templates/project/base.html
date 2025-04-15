@@ -1,0 +1,54 @@
+<!-- File: project/templates/project/base.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This is the base template for the  application.
+    It includes the main structure of the webpage, including the header, footer, and navigation links.
+    Other templates extend from this base template.
+-->
+    
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link type="text/css" rel="stylesheet" href="{% static 'project/project.css' %}">
+    <title>Restaurant Reservation</title>
+  </head>
+  <body>
+    <header>
+        <h1>Restaurant Reservation</h1>
+        <nav>
+          <ul>
+              <li><a href="{% url 'restaurant_list' %}">Show All</a></li>
+              
+          </ul>
+      </nav>
+    </header>
+
+    <main>
+      {% block content %}
+
+      {% endblock %}
+    </main>
+
+    <footer>
+      <p>All rights reserved by Winson Dong <a href="https://www.linkedin.com/in/winsondong/" target="_blank">Credits</a>&copy;</p>
+    </footer>
+  </body>
+
+
+
+
+
+
+
+
+
+
+</html>

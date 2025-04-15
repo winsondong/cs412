@@ -9,7 +9,9 @@
 
 
 <h3>Filter</h3>
+
 <table>
+  <form method="get" action="{% url 'home' %}">
     <tr>
         <td><label for="party">Party Affiliation</label></td>
         <td>
@@ -96,7 +98,7 @@
 
     
     <tr>
-        <td><input type="submit" value="Search"></td>
-      </tr>
-    
+      <td><input type="submit" value="Search"></td>
+    </tr>
+  </form>
 </table>

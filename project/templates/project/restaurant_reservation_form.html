@@ -1,0 +1,52 @@
+<!-- File: project/templates/project/restuarant_reservation_form.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template for users to make a reservation for a restaurant.
+-->
+
+
+{% extends 'project/base.html' %}
+
+    {% block content %}
+    <form action="{% url 'restaurant_reservation' restaurant.pk %}" method="post" class="reservation-form">
+        {% csrf_token %}
+
+        <fieldset class="form-fieldset">
+            <legend class="form-legend">Make a reservation for {{restaurant.restaurant_name}}!</legend>
+
+            <div class="form-group">
+                <label for="{{ form.reservation_date.id_for_label }}" class="form-label">Date:</label>
+                {{ form.reservation_date }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.reservation_time.id_for_label }}" class="form-label">Time:</label>
+                {{ form.reservation_time }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.party_size.id_for_label }}" class="form-label">Party Size:</label>
+                {{ form.party_size }}
+            </div>
+
+            <div class="form-group">
+                <label for="{{ form.table.id_for_label }}" class="form-label">Table:</label>
+                {{ form.table }}
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Reserve</button>
+            </div>
+        </fieldset>
+    </form>
+    
+    <!-- Back button to return to restaurant detail page -->
+    <div class="form-actions">
+        <button><a href="{% url 'restaurant_detail' restaurant.pk %}">Back to restaurant</a></button>
+    </div>
+    
+
+    {% endblock %}

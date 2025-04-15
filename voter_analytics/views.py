@@ -52,7 +52,6 @@ class VoterListView(ListView):
 
             if party:
                 query = query.filter(party_affiliation=party)
-            
             if min_birth_year:
                 query = query.filter(dob__year__gte=min_birth_year)
             if max_birth_year:
