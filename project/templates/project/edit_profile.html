@@ -1,0 +1,32 @@
+<!-- File: project/templates/project/edit_profile.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template allows the customer to update its page.
+    
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<div>
+    <h1>Update profile</h1>
+    
+    <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
+        
+        {% csrf_token %}
+        <table>
+            {{form.as_table}}
+        </table>
+        <div class="confirmation-buttons">
+            <input type="submit" name="submit" value="Submit">
+            <!-- Add a separate form for a cancel button -->
+            <button><a href="{% url 'customer_profile' %}">Cancel</a></button>
+        </div>
+        
+    </form>
+</div>
+  
+{% endblock %}

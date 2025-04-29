@@ -1,0 +1,59 @@
+<!-- File: project/templates/project/create_customer.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template displays creation of customer and account.
+-->
+
+
+{% extends 'project/base.html' %}
+
+    {% block content %}
+    
+    <form action="{% url 'register' %}" method="post">
+        {% csrf_token %}
+
+        <h3>Sign up</h3>
+        <div>
+            <!-- Customer Info -->
+            <div class="customer-info">
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label">First Name:</label>
+                    {{ form.first_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label">Last Name:</label>
+                    {{ form.last_name }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="form-group">
+                    <label for="{{ form.phone_numer.id_for_label }}" class="form-label">Phone Number:</label>
+                    {{ form.phone_number }}
+                </div>
+            </div>
+            <!-- User Form Info -->
+            <div class="user-info">
+                {% for field in user_form %}
+                    <div class="form-group">
+                        <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}:</label>
+                        {{ field }}
+                        {{ field.errors }}
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+
+        <input type="submit" name="submit" value="Create new profile">
+    </form>
+
+    {% endblock %}
+

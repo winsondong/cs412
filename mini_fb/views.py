@@ -133,7 +133,7 @@ class CreateStatusMessageView(LoginRequiredMixin, CreateView):
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)
     
-    def get_success_url(self) -> str:
+    def get_success_url(self):
         '''Return the URL to redirect to after successfully submitting form.'''
        
         return self.object.profile.get_absolute_url()

@@ -26,17 +26,17 @@
                     <li><a href="{% url 'create_profile' %}">Create Profile</a></li>
                     {% if request.user.is_authenticated %}
                             Logged in as user: {{ request.user }}
-                        {% endif %}
+                    {% endif %}
                         
                     {% if request.user.is_authenticated %}
                     <li>
-                        <form method="post" action="{% url 'logout' %}">
+                        <form method="post" action="{% url 'logout_mfb' %}">
                             {% csrf_token %}
                             <button type="submit">Logout</button>
                         </form>
                     </li>
                     {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'login_mfb' %}">Login</a></li>
                     {% endif %}
                 </ul>
             </nav>

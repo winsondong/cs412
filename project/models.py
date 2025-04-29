@@ -7,6 +7,8 @@ Description:
 
 
 from django.db import models
+from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Restaurant(models.Model):
@@ -21,7 +23,6 @@ class Restaurant(models.Model):
         ("french", "French"),
         ("greek", "Greek"),
         ("mediterranean", "Mediterranean"),
-        # add more as needed
     ]
 
     restaurant_name = models.TextField(blank=False)
@@ -34,7 +35,6 @@ class Restaurant(models.Model):
     restaurant_state = models.TextField(blank=False)
     restaurant_zip_code = models.IntegerField(blank=False)
 
-
     restaurant_number = models.TextField(blank=False)
     opening_hours = models.TextField(blank=False)
 
@@ -42,13 +42,19 @@ class Restaurant(models.Model):
         return f"{self.restaurant_name}"
     
 class Customer(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     first_name = models.TextField(blank=False)
     last_name = models.TextField(blank=False)
     email = models.EmailField(blank=False)
     phone_number = models.TextField(blank=False)
+    profile_image =  models.ImageField(blank=True)
+
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+    
+    def get_absolute_url(self):
+        return reverse('restaurant_list')
     
 
 class Table(models.Model):

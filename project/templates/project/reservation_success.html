@@ -1,0 +1,18 @@
+<!-- File: project/templates/project/reservation_success.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template allows for filtering by cuisine.
+-->
+
+{% extends 'project/base.html' %}
+
+    {% block content %}
+
+        <h1>Reservation Confirmed</h1>
+        <p>Your reservation for {{reservation.restaurant.restaurant_name}} has been booked for {{reservation.restaurant.restaurant_date}} at {{reservation.restaurant.restaurant_time}}.</p>
+        <a href="{% url 'restaurant_list' %}">Browse more restaurants</a>
+    
+    {% endblock %}

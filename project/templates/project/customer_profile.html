@@ -1,0 +1,31 @@
+<!-- File: project/templates/project/customer_profile.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template provides the customer profile page.
+    
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+  <h2>My Profile</h2>
+
+  <div class="profile-container">
+    {% if customer.profile_image %}
+      <img src="{{ customer.profile_image.url }}" alt="Profile image of {{ customer.user.username }}" class="profile-img"/>
+    {% endif %}
+
+    <div class="profile-details">
+      <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
+      <p>Username: {{ customer.user.username }}</p>
+      <p>Email: {{ customer.email }}</p>
+      <p>Phone: {{ customer.phone_number }}</p>
+    </div>
+  </div>
+
+  <a href="{% url 'edit_profile' %}">Edit profile</a>
+  
+{% endblock %}

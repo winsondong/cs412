@@ -18,15 +18,32 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" rel="stylesheet" href="{% static 'project/project.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <title>Restaurant Reservation</title>
   </head>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <body>
     <header>
         <h1>Restaurant Reservation</h1>
         <nav>
           <ul>
               <li><a href="{% url 'restaurant_list' %}">Show All</a></li>
-              
+              {% if request.user.is_authenticated %}
+              <li>Logged in as user: {{ request.user }}</li>
+              {% endif %}
+             
+              {% if request.user.is_authenticated %}
+              <li>
+                  <form method="post" action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit">Logout</button>
+                  </form>
+              </li>
+              <li><a href="{% url 'customer_profile' %}">My profile</a></li>
+              {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                <li><a href="{% url 'register' %}">Register</a></li>
+              {% endif %}
           </ul>
       </nav>
     </header>
