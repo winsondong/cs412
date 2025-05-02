@@ -8,27 +8,27 @@
 -->
 
 
-<h3>Filter</h3>
+<div class="filter-container">
+  <h3 class="filter-heading">Filter Restaurants</h2>
 
-<table>
   <form method="get" action="{% url 'restaurant_list' %}">
-    <tr>
-        <td><label for="cuisine">Cuisines<label></td>
-        <td>
-            <select name="cuisine" id="cuisine">
-                <option value="">All cuisines</option>
-                {% for cuisine in cuisines %}
-                    <option value="{{ cuisine }}" {% if request.GET.cuisine == cuisine %}selected{% endif %}>
-                        {{ cuisine|capfirst }}
-                    </option>
-                {% endfor %}
-            </select>
-            
-        </td>
-    </tr>
     
-    <tr>
-      <td><input type="submit" value="Search"></td>
-    </tr>
+      <div class="form-group">
+        <label for="cuisine">Cuisine</label>
+        <select name="cuisine" id="cuisine">
+          <option value="">All cuisines</option>
+          {% for cuisine in cuisines %}
+            <option
+              value="{{ cuisine }}"
+              {% if request.GET.cuisine == cuisine %}selected{% endif %}
+            >
+              {{ cuisine|capfirst }}
+            </option>
+          {% endfor %}
+        </select>
+      </div>
+    
+
+    <button type="submit">Search</button>
   </form>
-</table>
+</div>

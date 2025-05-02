@@ -11,8 +11,12 @@
 
     {% block content %}
 
-        <h1>Reservation Confirmed</h1>
-        <p>Your reservation for {{reservation.restaurant.restaurant_name}} has been booked for {{reservation.restaurant.restaurant_date}} at {{reservation.restaurant.restaurant_time}}.</p>
-        <a href="{% url 'restaurant_list' %}">Browse more restaurants</a>
+        <div class="reservation-success-container">
+            <h1>Reservation Confirmed</h1>
+            <p>Your reservation for {{reservation.restaurant.restaurant_name}} has been booked for {{reservation.reservation_date}} at {{reservation.reservation_time}}!</p>
+            <button><a href="{% url 'restaurant_list' %}">Browse more restaurants</a></button>
+            <br>
+            <button><a href="{% url 'customer_profile' %}">Go to profile</a></button>
+        </div>
     
     {% endblock %}

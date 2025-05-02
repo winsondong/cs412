@@ -223,7 +223,7 @@ class UpdateStatusMessageView(LoginRequiredMixin, UpdateView):
 
     def get_login_url(self):
         ''' custom URL '''
-        return reverse("login")
+        return reverse("login_mfb")
     
 
 class AddFriendView(LoginRequiredMixin, View):
@@ -248,7 +248,7 @@ class AddFriendView(LoginRequiredMixin, View):
 
     def get_login_url(self):
         ''' custom URL '''
-        return reverse("login")
+        return reverse("login_mfg")
     
 
 class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
@@ -262,7 +262,7 @@ class ShowFriendSuggestionsView(LoginRequiredMixin, DetailView):
 
     def get_login_url(self):
         ''' custom URL '''
-        return reverse("login")
+        return reverse("login_mfb")
 
 
 class ShowNewsFeedView(LoginRequiredMixin, DetailView):
@@ -277,5 +277,5 @@ class ShowNewsFeedView(LoginRequiredMixin, DetailView):
 
     def get_login_url(self):
         ''' custom URL '''
-        return reverse("login")
+        return reverse("login_mfb")
     

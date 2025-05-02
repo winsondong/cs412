@@ -1,0 +1,74 @@
+<!-- File: project/templates/project/reservation_edit_form.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template allows the user to edit their reservation
+-->
+
+{% extends 'project/base.html' %}
+
+    {% block content %}
+    <form method="post" class="reservation-form">
+        {% csrf_token %}
+        <div class="reservation-form-container">
+            <h2 class="reservation-form-header">Edit reservation for Table {{selected_table.table_number}} at<br>{{restaurant.restaurant_name}}</h2>
+
+            <div class="reservation-form-info">
+                <div class="form-group">
+                    <label for="{{ form.reservation_date.id_for_label }}" class="form-label">Date:</label>
+                    {{ form.reservation_date }}
+                </div>
+
+                <div class="form-group">
+                    <label for="{{ form.reservation_time.id_for_label }}" class="form-label">Time:</label>
+                    {{ form.reservation_time }}
+                </div>
+
+                <div class="form-group">
+                    <label for="id_party_size" class="form-label">Party Size:</label>
+                    <select name="party_size" id="id_party_size">
+                    <option value="" disabled selected>Choose…</option>
+                    {% for n in seat_range %}
+                        <option value="{{ n }}">{{ n }}</option>
+                    {% endfor %}
+                    </select>
+                </div>
+                <!-- This is hidden so customers can't change the table unless they hit back button -->
+                <div class="form-group">
+                    {{ form.table }}
+                </div>
+            </div>
+            <div class="reservation-form-actions">
+                <input type="submit" name="submit" value="Save changes">
+            </div>
+
+            <!-- Back button to return to restaurant detail page -->
+            <div class="reservation-form-actions">
+                <button><a href="{% url 'customer_profile' %}">Back to profile</a></button>
+            </div>
+        </div>
+    </form>
+
+
+    <script>
+        // date‐picker on the reservation_date field
+        flatpickr("input[name='reservation_date']", {
+          minDate: "today",
+          dateFormat: "Y-m-d"
+        });
+      
+        // time‐picker on the reservation_time field, 15-minute steps only
+        flatpickr("input[name='reservation_time']", {
+          enableTime: true,
+          noCalendar: true,
+          dateFormat: "h:i",
+          minuteIncrement: 15
+        });
+      </script>
+
+{% endblock %}
+
+
+

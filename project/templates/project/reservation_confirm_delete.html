@@ -1,0 +1,36 @@
+<!-- File: project/templates/project/reservation_confirm_delete.html -->
+<!--
+    CS412 - Project (Restaurant Reservation)
+    Author: Winson Dong (winson@bu.edu)
+    
+    Description:
+    This template creates the confirmation for the customer to cancel a reservation.
+    
+-->
+
+{% extends 'project/base.html' %}
+
+{% block content %}
+<form method="post" class="reservation-form">
+    <div class="reservation-form-container">
+        <h2 class="reservation-form-header">Cancel Reservation</h2>
+        <p>Are you sure you want to cancel your reservation for Table 
+            {{reservation.table.table_number}} 
+            at <br> {{reservation.restaurant.restaurant_name}} 
+            on {{reservation.reservation_date}} 
+            at {{reservation.reservation_time}}?
+        </p>
+
+        
+        {% csrf_token %}
+            <div class="reservation-form-actions">
+                <input type="submit" name="submit" value="Yes, cancel it">
+            </div>
+
+            <div class="reservation-form-actions">
+                <button><a href="{% url 'customer_profile' %}">No, go back</a></button>
+            </div>
+        
+    </div>
+</form>
+{% endblock %}

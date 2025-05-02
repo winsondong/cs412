@@ -24,30 +24,53 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <body>
     <header>
-        <h1>Restaurant Reservation</h1>
-        <nav>
-          <ul>
-              <li><a href="{% url 'restaurant_list' %}">Show All</a></li>
-              {% if request.user.is_authenticated %}
-              <li>Logged in as user: {{ request.user }}</li>
-              {% endif %}
-             
-              {% if request.user.is_authenticated %}
-              <li>
-                  <form method="post" action="{% url 'logout' %}">
-                      {% csrf_token %}
-                      <button type="submit">Logout</button>
-                  </form>
-              </li>
-              <li><a href="{% url 'customer_profile' %}">My profile</a></li>
-              {% else %}
-                <li><a href="{% url 'login' %}">Login</a></li>
-                <li><a href="{% url 'register' %}">Register</a></li>
-              {% endif %}
-          </ul>
-      </nav>
-    </header>
+      <div class="base-container">
+        <h1>
+          <a href="{% url 'restaurant_list' %}">
+            Restaurant Reservations
+          </a>
+        </h1>
 
+       
+        {% if request.user.is_authenticated %}
+          <p class="user-greeting">
+            Welcome, <strong>{{ request.user.username }}</strong>
+          </p>
+        {% endif %}
+    
+          <nav>
+            <ul>
+              <li>
+                <a href="{% url 'restaurant_list' %}">Show All Restaurants</a>
+              </li>
+      
+              {% if request.user.is_authenticated %}
+              <div class="authenticated-nav">
+                <li>
+                  <a href="{% url 'customer_profile' %}">My Profile</a>
+                </li>
+                <li>
+                  <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                  </form>
+                </li>
+              </div>
+            {% else %}
+              <div class="guest-nav">
+                <li>
+                  <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                  <a href="{% url 'registration' %}">Register</a>
+                </li>
+              </div>
+            {% endif %}
+            </ul>
+          </nav>
+        </div>
+    </header>
+    
     <main>
       {% block content %}
 

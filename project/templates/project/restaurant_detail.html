@@ -4,7 +4,7 @@
     Author: Winson Dong (winson@bu.edu)
     
     Description:
-    This template displays a list of all restaurants.
+    This template displays details for a single restaurant
     Users can click on a restaurant to view more details and make a reservation.
 -->
 
@@ -12,29 +12,37 @@
 {% extends 'project/base.html' %}
 
     {% block content %}
-    
-        <h1>{{ restaurant.restaurant_name }}</h1>
-        <p><strong>Cuisine:</strong> {{ restaurant.get_cuisine_display }}</p>
-        <p><strong>Address:</strong> 
-            {{ restaurant.restaurant_street_number }} {{ restaurant.restaurant_street_name }},
-            {{ restaurant.restaurant_city }}, {{ restaurant.restaurant_state }} {{ restaurant.restaurant_zip_code }}
-        </p>
-        <p><strong>Phone:</strong> {{ restaurant.restaurant_number }}</p>
-        <p><strong>Hours:</strong> {{ restaurant.opening_hours }}</p>
+        <div class="restaurant-details-container">
+            <div class="restaurant-details-card">
+                <h2>{{ restaurant.restaurant_name }}</h2>
+                    <p><strong>Cuisine:</strong> {{ restaurant.get_cuisine_display }}</p>
+                    <p><strong>Address:</strong> 
+                        {{ restaurant.restaurant_street_number }} {{ restaurant.restaurant_street_name }},
+                        {{ restaurant.restaurant_city }}, {{ restaurant.restaurant_state }} {{ restaurant.restaurant_zip_code }}
+                    </p>
+                    <p><strong>Phone:</strong> {{ restaurant.restaurant_number }}</p>
+                    <p><strong>Hours:</strong> {{ restaurant.opening_hours }}</p>
+            </div>
 
-        <h2>Available Tables</h2>
-        <ul>
-            {% for table in restaurant.tables.all %}
-                <li>Table {{ table.table_number }} - {{ table.seating_capacity }} seats available</li>
-            {% empty %}
-                <li>No tables defined yet.</li>
-            {% endfor %}
-        </ul>
+            {% if request.user.is_authenticated %}
+            <div class="restaurant-details-tables">
+                <h3>Available Tables</h3>
+                    <ul>
+                        {% for table in tables %}
+                           <a href="{% url 'restaurant_reservation' restaurant.pk %}?table={{ table.pk }}"><li>Table {{ table.table_number }} - {{ table.seating_capacity }} seats available</li></a>
+                           
+                        {% endfor %}
+                    </ul>
+            </div>
+            {% endif %}
 
-        {% if request.user.is_authenticated %}
-            <a href="{% url 'restaurant_reservation' restaurant.pk %}">Click here to make a reservation!</a>
-        {% else %}
-            <a href="{% url 'login' %}">Login to make a reservation!</a>
-        {% endif %}
+            {% if not request.user.is_authenticated %}
+                <div class="restaurant-details-reservation">
+                    <a href="{% url 'login' %}">Login to make a reservation!</a>
+                </div>
+            {% endif %}
 
+            <button class="back-to-restaurants-btn"><a href="{% url 'restaurant_list' %}">Back to all restaurants</a></button>
+
+        </div>
     {% endblock %}

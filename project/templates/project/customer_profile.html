@@ -11,21 +11,43 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-  <h2>My Profile</h2>
+<div class="profile-container">
+  <h2 class="profile-heading">My Profile</h2>
+    <div class="profile-card">
+      {% if customer.profile_image %}
+        <img src="{{ customer.profile_image.url }}" alt="Profile image of {{ customer.user.username }}" class="profile-img"/>
+      {% endif %}
+      <div class="profile-details">
+        <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
+        <p>Username: {{ customer.user.username }}</p>
+        <p>Email: {{ customer.email }}</p>
+        <p>Phone: {{ customer.phone_number }}</p>
+        <a href="{% url 'edit_profile' %}">Edit profile</a>
+      </div>
+    </div>
 
-  <div class="profile-container">
-    {% if customer.profile_image %}
-      <img src="{{ customer.profile_image.url }}" alt="Profile image of {{ customer.user.username }}" class="profile-img"/>
-    {% endif %}
-
-    <div class="profile-details">
-      <p>Name: {{ customer.first_name }} {{ customer.last_name }}</p>
-      <p>Username: {{ customer.user.username }}</p>
-      <p>Email: {{ customer.email }}</p>
-      <p>Phone: {{ customer.phone_number }}</p>
+  <h2 class="profile-heading">My Reservations</h2>
+    <div class="profile-reservations">
+      {% if has_reservation %}
+        {% for reservation in reservations %}
+        <li class="reservation-item">
+          <div class="reservation-details">
+            Table {{ reservation.table.table_number }}
+            at {{ reservation.restaurant.restaurant_name }}
+            on {{ reservation.reservation_date }}
+            at {{ reservation.reservation_time }}
+          </div>
+          <div class="reservation-actions">
+           <button class="edit-btn"><a href="{% url 'reservation_edit' reservation.pk %}">Edit</a></button> <button class="cancel-btn"><a href="{% url 'reservation_delete' reservation.pk %}">Cancel</a></button>
+          </div>
+        </li>
+        {% endfor %}
+      {% else %}
+        <p>No reservations yet.</p>
+      {% endif %}
     </div>
   </div>
 
-  <a href="{% url 'edit_profile' %}">Edit profile</a>
+  
   
 {% endblock %}

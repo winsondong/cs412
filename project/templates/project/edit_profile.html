@@ -11,22 +11,54 @@
 {% extends 'project/base.html' %}
 
 {% block content %}
-<div>
-    <h1>Update profile</h1>
-    
-    <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data">
-        
+    <form action="{% url 'edit_profile' %}" method="post" enctype="multipart/form-data" class="profile-form">
         {% csrf_token %}
-        <table>
-            {{form.as_table}}
-        </table>
-        <div class="confirmation-buttons">
-            <input type="submit" name="submit" value="Submit">
-            <!-- Add a separate form for a cancel button -->
-            <button><a href="{% url 'customer_profile' %}">Cancel</a></button>
+        <div class="profile-form-container">
+            <h2 class="profile-form-header">Update profile for {{customer.first_name}} {{customer.last_name}}</h1>
+            <div class="profile-form-info">
+                <div class="form-group">
+                    <label for="{{ form.first_name.id_for_label }}" class="form-label">First name:</label>
+                    {{ form.first_name }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.last_name.id_for_label }}" class="form-label">
+                    Last name:
+                    </label>
+                    {{ form.last_name }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">
+                    Email:
+                    </label>
+                    {{ form.email }}
+                </div>
+                
+                <div class="form-group">
+                    <label for="{{ form.phone_number.id_for_label }}" class="form-label">
+                    Phone number:
+                    </label>
+                    {{ form.phone_number }}
+                </div>
+                
+                
+                <label for="{{ form.profile_image.id_for_label }}" class="form-label">Profile image:</label>
+                {{ form.profile_image }}
+            
+            </div>
+
+            <div class="profile-form-actions">
+                <input type="submit" name="submit" value="Update">
+            </div>
+
+            <!-- Back button to return to restaurant detail page -->
+            <div class="profile-form-actions">
+                <button><a href="{% url 'customer_profile' %}">Back to profile</a></button>
+            </div>
+            
         </div>
-        
     </form>
-</div>
-  
-{% endblock %}
+    
+    {% endblock %}
+

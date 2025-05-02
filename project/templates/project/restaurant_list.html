@@ -11,27 +11,43 @@
 
 {% extends 'project/base.html' %}
 
-    {% block content %}
-    <h1>Browse Resaturant</h1>
+{% block content %}
+    <h1>Browse Restaurant</h1>
 
-    <div>
-        <form action="{% url 'restaurant_list' %}" method="GET">
-          {% include "project/filter.html" %}
-        </form>
+    <div class="filter-div">
+    <form action="{% url 'restaurant_list' %}" method="GET">
+        {% include "project/filter.html" %}
+    </form>
     </div>
 
     <div class="restaurant-list">
-        {% for restaurant in restaurants %}
-            <div class="restaurant-card">
-                <a href="{% url 'restaurant_detail' restaurant.pk %}"><h2>{{restaurant.restaurant_name}}</h2></a>
-                <p><strong>Cuisine: </strong>{{ restaurant.get_cuisine_display }}</p>
-                <p><strong>Address: </strong> {{ restaurant.restaurant_street_number }} {{ restaurant.restaurant_street_name }},
-                    {{ restaurant.restaurant_city }}, {{ restaurant.restaurant_state }} {{ restaurant.restaurant_zip_code }}
-                </p>
-                <p><strong>Phone:</strong> {{ restaurant.restaurant_number }}</p>
-                <p><strong>Hours:</strong> {{ restaurant.opening_hours }}</p>
-            </div>
-            <hr>
-        {% endfor %}
+    {% for restaurant in restaurants %}
+        <article class="restaurant-card">
+        <h2>
+            <a href="{% url 'restaurant_detail' restaurant.pk %}">
+            {{ restaurant.restaurant_name }}
+            </a>
+        </h2>
+        <p class="cuisine">
+            <strong>Cuisine:</strong> {{ restaurant.get_cuisine_display }}
+        </p>
+        <p class="address">
+            <strong>Address:</strong>
+            {{ restaurant.restaurant_street_number }}
+            {{ restaurant.restaurant_street_name }},
+            {{ restaurant.restaurant_city }},
+            {{ restaurant.restaurant_state }}
+            {{ restaurant.restaurant_zip_code }}
+        </p>
+        <p class="phone">
+            <strong>Phone:</strong> {{ restaurant.restaurant_number }}
+        </p>
+        <p class="hours">
+            <strong>Hours:</strong> {{ restaurant.opening_hours }}
+        </p>
+        </article>
+        <hr>
+    {% endfor %}
     </div>
-    {% endblock %}
+
+{% endblock %}
